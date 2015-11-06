@@ -1,0 +1,101 @@
+body:before {
+	content: "";
+	position: fixed;
+	top: -40px;
+	left: -40px;
+	z-index: -1;
+
+	display: block;
+	background-image: url('http://nacr.us/media/WallPapers/algorithms/poisson_disc_iv.png');
+	background-size:200%;
+	background-position: 50% 50%;
+	background-repeat: repeat;
+	width: 120%;
+	height: 120%;
+
+	-webkit-filter: blur(20px);
+	-moz-filter: blur(20px);
+	-o-filter: blur(20px);
+	-ms-filter: blur(20px);
+	filter: blur(20px);
+}
+
+.greeting {
+    color: #2e2e2e;
+    font-family: 'Droid Serif','Times New Roman';
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 100px;
+	text-align: center;
+}
+
+.flex-container {
+	display: flex;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+.column {
+	/*border: 1px solid #e0e0e0;*/
+	flex-direction: column;
+	flex-wrap: nowrap;
+	display: flex;
+	justify-content: flex-start;
+	flex: 2 1 10%;
+}
+.column > * {
+	margin: 0 auto;
+}
+
+body {
+	color: #2e2e2e;
+	font-family: 'Droid Serif','Times New Roman';
+	text-shadow:
+	 -1px -1px 0 #fff,  
+	  1px -1px 0 #fff,
+	  -1px 1px 0 #fff,
+	   1px 1px 0 #fff;
+}
+@media (min-width: 600px){
+	body {
+		font-size: 60px;
+	}
+	.label {
+		text-align: center;
+		font-size: 15px;
+		max-width: 80%;
+		margin: 0 auto;
+	}
+	.greeting {
+		font-size: 90px;
+		padding: 43px 0 23px;
+	}
+}
+@media (max-width: 600px){
+	body {
+		font-size: 30px;
+	}
+	.label {
+		text-align: center;
+		font-size: 10px;
+		max-width: 80%;
+		margin: 0 auto;
+	}
+	.greeting {
+		font-size: 45px;
+		padding: 20px 0 10px;
+	}
+}
+
+.entry {
+	min-height: 125px;
+	margin-bottom: 20px;
+}
+.result {
+	text-align: center;
+}
+
+
+
