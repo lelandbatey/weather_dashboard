@@ -2,7 +2,7 @@
 """Test richland weather"""
 
 from __future__ import print_function
-import richland_weather as RW
+from .richland_weather import Weather, RichlandWeather
 import unittest
 
 SAMPLE_DATA = "".join('\r\n'
@@ -37,14 +37,14 @@ class TestWeatherBase(unittest.TestCase):
 
     def test_mock_methods(self):
         """Test that all Weather methods raise NotImplemented"""
-        self.assertRaises(NotImplementedError, RW.Weather().get_weather)
+        self.assertRaises(NotImplementedError, Weather().get_weather)
 
 class TestRichlandWeatherGetWeather(unittest.TestCase):
     """Test RichlandWeather methods has correct formats"""
 
     def setUp(self):
         """Setup temp instance of RichlandWeather"""
-        self.rw = RW.RichlandWeather()
+        self.rw = RichlandWeather()
 
     def test_return_type(self):
         """Ensure the `get_weather` method returns dictionary"""
@@ -63,7 +63,7 @@ class TestParseHMS(unittest.TestCase):
 
     def setUp(self):
         """Setup temp data and RW instance"""
-        self.rw = RW.RichlandWeather()
+        self.rw = RichlandWeather()
         self.text = SAMPLE_DATA
 
     def test_parse_type(self):

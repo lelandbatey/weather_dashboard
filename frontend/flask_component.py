@@ -15,12 +15,17 @@ APP = flask.Flask(__name__,
                   template_folder=join(dirname(realpath(__file__)), "templates"),
                   static_folder=join(dirname(realpath(__file__)), "static"))
 
-APP.config.update({"WEATHER_SERVICE": None})
+APP.config.update({"WEATHER_SERVICE": None,
+                   "TRAFFIC_SERVICE": None})
 
 def set_weather_service(weather_service_class):
     """Expose a function so the weather_service can be set from an external
     source."""
     APP.config["WEATHER_SERVICE"] = weather_service_class
+def set_traffic_service(traffic_service_callable):
+    """Expose a function so the weather_service can be set from an external
+    source."""
+    APP.config["TRAFFIC_SERVICE"] = traffic_service_callable
 
 
 def make_json_response(in_data):
@@ -44,6 +49,12 @@ def get_weather():
     service = APP.config["WEATHER_SERVICE"]()
     weather_data = service.get_weather()
     return make_json_response(weather_data)
+
+@APP.route('/api/traffic')
+def get_traffic():
+    """Serve the traffic data on the api."""
+    traffic_data = APP.config["TRAFFIC_SERVICE"]()
+    return make_json_response(traffic_data)
 
 
 

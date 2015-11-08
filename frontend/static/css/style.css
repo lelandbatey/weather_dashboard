@@ -90,6 +90,9 @@ body {
 	}
 }
 
+.tick > text {
+	font-size: 8px;
+}
 .entry {
 	min-height: 125px;
 	margin-bottom: 20px;
@@ -98,5 +101,23 @@ body {
 	text-align: center;
 }
 
+
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.x.axis path {
+	display: none;
+}
+
+.line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 1.5px;
+}
 
 

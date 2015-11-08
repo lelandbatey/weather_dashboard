@@ -1,4 +1,4 @@
-define("CardinalDirections", [], function(){
+define([], function(){
 "use strict";
 
 var to_return = {};

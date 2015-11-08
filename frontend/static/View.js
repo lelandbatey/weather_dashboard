@@ -31,6 +31,7 @@ rv.refine = function (data, spec){
                 ent_vw.label = label_str;
             }
             ent_vw.contents = formatter(rawdata);
+            console.log(ent_vw.contents);
             views.push(ent_vw);
         }
     }
@@ -40,26 +41,34 @@ rv.refine = function (data, spec){
 /**
  * Given a list of refined View objects, insert those Views into the dom.
  *
- * @views An Array of one objects, either ViewObjects or 
+ * @views An Array of one objects, either ViewObjects or
  *
  */
 rv.insertViews = function (views){
     var elements = [];
     for (var i = 0; i < views.length; i++){
-        var result = views[i];
-        var entry_div = $("<div>").addClass("entry");
-        var result_div = $("<div>").addClass("result");
-        var label_div = $("<div>").addClass("label");
-        entry_div.append(result_div, label_div);
+        var view = views[i];
 
-        result_div.text(result.contents);
-        label_div.text(result.label);
-        elements.push(entry_div);
+        // If our view contents is a function, let the view create itself
+        // however, then append output to elements.
+        if (isFunction(view.contents)){
+            elements.push(view.contents());
+        } else {
+            var entry_div = $("<div>").addClass("entry");
+            var result_div = $("<div>").addClass("result");
+            var label_div = $("<div>").addClass("label");
+            entry_div.append(result_div, label_div);
+
+            result_div.text(view.contents);
+            label_div.text(view.label);
+            elements.push(entry_div);
+        }
     }
     var column_count = 0;
     var columns = $('.column');
     for (var i = 0; i < elements.length; i++){
         var view = elements[i];
+        console.log("View:", view);
         $(columns[column_count]).append(view);
         column_count = (column_count+1) % columns.length;
     }

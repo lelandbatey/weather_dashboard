@@ -13,7 +13,7 @@ function EntryView(label, contents){
    } else if (arguments.length === 1){
       throw "Cannot create EntryView with out 'label' and 'contents' arguments";
    } else {
-      this.label = lable;
+      this.label = label;
       this.contents = contents;
    }
 }
