@@ -1,8 +1,10 @@
-define(['views/EntryView'], function(EntryView){
+define(['views/EntryView', 'views/TrafficView', 'views/StdView'], function(EntryView, TrafficView, StdView){
 "use strict";
 var rv = {};
 
 rv.EntryView = EntryView;
+rv.TrafficView = TrafficView;
+rv.StdView = StdView;
 
 function isFunction(f){
     return typeof f === "function";
@@ -18,12 +20,18 @@ rv.refine = function (data, spec){
     var views = [];
     for (var key in spec){
         if (spec.hasOwnProperty(key)){
+            var view_class;
             var tmp = spec[key];
             var label_str = tmp[0];
             var formatter = tmp[1];
             var rawdata = data[key];
+            if (tmp.length > 2){
+                view_class = tmp[2];
+            } else {
+                view_class = EntryView;
+            }
 
-            var ent_vw = new EntryView();
+            var ent_vw = new view_class();
 
             if (isFunction(label_str)){
                 ent_vw.label = label_str(rawdata);
@@ -31,7 +39,7 @@ rv.refine = function (data, spec){
                 ent_vw.label = label_str;
             }
             ent_vw.contents = formatter(rawdata);
-            console.log(ent_vw.contents);
+            //console.log(ent_vw.contents);
             views.push(ent_vw);
         }
     }
@@ -68,7 +76,7 @@ rv.insertViews = function (views){
     var columns = $('.column');
     for (var i = 0; i < elements.length; i++){
         var view = elements[i];
-        console.log("View:", view);
+        //console.log("View:", view);
         $(columns[column_count]).append(view);
         column_count = (column_count+1) % columns.length;
     }

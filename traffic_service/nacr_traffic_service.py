@@ -24,14 +24,15 @@ class NacrTrafficService(TrafficService):
         """Initialize self."""
         source_url = "http://lelandbatey.com/netinfo/local.vnstat.log"
         self.source_url = source_url
+        self.source_label = "nacr.us"
+        self.date_fmt = "%m/%d/%y"
 
     def get_traffic(self):
-        """Returns parsed form of traffic data from Nacr.us"""
+        """Returns parsed form of traffic data from 'self.source_url'"""
         req = requests.get(self.source_url)
         text = req.text
         interface, rv = self.parse_traffic(text)
-        host = "nacr.us, "+interface
-        # pprint(rv)
+        host = ", ".join([self.source_label, interface])
         return host, rv
 
     def parse_traffic(self, text):
@@ -49,7 +50,7 @@ class NacrTrafficService(TrafficService):
         entries = []
 
         for date_str, rate in raw_entries:
-            date = datetime.datetime.strptime(date_str, "%m/%d/%y")
+            date = datetime.datetime.strptime(date_str, self.date_fmt)
             epoch = datetime_to_epoch(date)
 
             rate, unit = rate.split(' ')
