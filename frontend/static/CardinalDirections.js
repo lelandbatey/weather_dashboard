@@ -44,7 +44,7 @@ function degToDirection(deg){
 
 to_return.degToDirection = degToDirection;
 
-var test_degToDirection = () => {
+var test_degToDirection = function() {
    function assert(first, second){
        if (first === second){
            return true;

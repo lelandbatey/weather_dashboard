@@ -6,18 +6,19 @@ body:before {
 	z-index: -1;
 
 	display: block;
-	background-image: url('http://nacr.us/media/WallPapers/algorithms/poisson_disc_iv.png');
+	/*background-image: url('../img/poisson_disc_iv.png');*/
+	background-color: #fff;
 	background-size:200%;
 	background-position: 50% 50%;
 	background-repeat: repeat;
 	width: 120%;
 	height: 120%;
 
-	-webkit-filter: blur(20px);
-	-moz-filter: blur(20px);
-	-o-filter: blur(20px);
-	-ms-filter: blur(20px);
-	filter: blur(20px);
+	/*-webkit-filter: blur(20px);*/
+	/*-moz-filter: blur(20px);*/
+	/*-o-filter: blur(20px);*/
+	/*-ms-filter: blur(20px);*/
+	/*filter: blur(20px);*/
 }
 
 .greeting {
@@ -38,7 +39,7 @@ body:before {
 
 
 .column {
-	/*border: 1px solid #e0e0e0;*/
+	border: 1px solid #e0e0e0;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	display: flex;
@@ -53,10 +54,10 @@ body {
 	color: #2e2e2e;
 	font-family: 'Droid Serif','Times New Roman';
 	text-shadow:
-	 -1px -1px 0 #fff,  
-	  1px -1px 0 #fff,
-	  -1px 1px 0 #fff,
-	   1px 1px 0 #fff;
+		-1px -1px 0 #fff,
+		1px -1px  0 #fff,
+		-1px 1px  0 #fff,
+		1px 1px   0 #fff;
 }
 @media (min-width: 600px){
 	body {
