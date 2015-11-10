@@ -12,9 +12,9 @@ TrafficView.prototype.generate_views = function (){
     var data = this.data['data'];
 
     // Define D3 stuff
-    var margin = {top: 0, right: 2, bottom: 30, left: 20},
+    var margin = {top: 3, right: 5, bottom: 35, left: 25},
         width =  240 - margin.left - margin.right,
-        height = 80 - margin.top - margin.bottom;
+        height = 100 - margin.top - margin.bottom;
 
     var xScale = d3.time.scale()
         .range([0, width]);
@@ -32,6 +32,7 @@ TrafficView.prototype.generate_views = function (){
         .x(function(d){ return xScale(new Date(d.timestamp*1000))})
         .y(function(d){ return yScale(d.rate);});
 
+    console.log(this.entry_div);
     console.log(this.result_div);
     var svg = d3.select(this.result_div[0]).append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -66,7 +67,7 @@ TrafficView.prototype.generate_views = function (){
         .call(xAxis.tickSize(3));
 
 
-    this.label_div.text(this.label);
+    this.label_div.text(this.key);
     return this.entry_div;
 }
 

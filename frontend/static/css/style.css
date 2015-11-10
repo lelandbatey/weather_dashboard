@@ -6,11 +6,16 @@ body:before {
 	z-index: -1;
 
 	display: block;
+
+	/*background: linear-gradient(135deg, #dfdfdf, rgba(223, 223, 223, 0), #dfdfdf), linear-gradient(45deg, #dfdfdf, rgba(223, 223, 223, 0), #dfdfdf), linear-gradient(45deg, rgba(223, 223, 223, 0) 48%, #c9c9c9 49%, #c9c9c9 51%, rgba(223, 223, 223, 0) 52%), linear-gradient(135deg, rgba(223, 223, 223, 0) 48%, #c9c9c9 49%, #c9c9c9 51%, rgba(223, 223, 223, 0) 52%);*/
+	/*background-color: #dfdfdf;*/
+	/*background-size: 20px 20px;*/
+
 	/*background-image: url('../img/poisson_disc_iv.png');*/
-	background-color: #fff;
-	background-size:200%;
-	background-position: 50% 50%;
-	background-repeat: repeat;
+	/*background-color: #fff;*/
+	/*background-size:200%;*/
+	/*background-position: 50% 50%;*/
+	/*background-repeat: repeat;*/
 	width: 120%;
 	height: 120%;
 
@@ -39,7 +44,7 @@ body:before {
 
 
 .column {
-	border: 1px solid #e0e0e0;
+	/*border: 1px solid #e0e0e0;*/
 	flex-direction: column;
 	flex-wrap: nowrap;
 	display: flex;

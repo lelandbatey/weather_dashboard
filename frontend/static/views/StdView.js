@@ -32,7 +32,7 @@ StdView.prototype.get_views = function(key, data){
     } else {
         this.generate_views();
     }
-    return this.result_div;
+    return this.entry_div;
 }
 
 return StdView;
