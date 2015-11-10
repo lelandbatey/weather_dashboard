@@ -46,8 +46,7 @@ def root():
 @APP.route('/api/weather')
 def get_weather():
     """Serve the weather data on the api."""
-    service = APP.config["WEATHER_SERVICE"]()
-    weather_data = service.get_weather()
+    weather_data = APP.config["WEATHER_SERVICE"]()
     return make_json_response(weather_data)
 
 @APP.route('/api/traffic')

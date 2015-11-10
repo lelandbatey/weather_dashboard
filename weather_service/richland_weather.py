@@ -22,6 +22,10 @@ class Weather(object):
         """Return the weather information for a given time and location."""
         raise NotImplementedError("Cannot call method on absract"+\
                                   " base class 'Weather'")
+    def __call__(self):
+        """Passthrough to the "get_weather" method. Done to allow uniform
+        access in by service_main.py to each service."""
+        return self.get_weather()
 
 def ensure_default_weather(func):
     """Decorator to add default values for missing dictionary entries to a dict
@@ -31,7 +35,7 @@ def ensure_default_weather(func):
     @wraps(func)
     def expand(*args, **kwargs):
         """Does the actual expansion of the returned data."""
-        ret = func(*args, **kwargs)
+        label, ret = func(*args, **kwargs)
         required_keys = ['text', 'temperature', 'wind_speed', 'wind_direction',
                          'relative_humidity']
 
@@ -40,7 +44,7 @@ def ensure_default_weather(func):
         for rk in required_keys:
             if not rk in ret:
                 ret[rk] = None
-        return ret
+        return label, ret
     return expand
 
 
@@ -53,17 +57,19 @@ class RichlandWeather(Weather):
         """Initialize self."""
         source_url = "http://www.hanford.gov/c.cfm/hms/realTime.cfm/stat11"
         self.source_url = source_url
+        self.source_label = "richland"
 
     @ensure_default_weather
     def get_weather(self, time=None, location=None):
-        """Retrieve and parse weather data, returns dict."""
+        """Retrieve and parse weather data, returns label for this service and
+        weather data as dict."""
         req = requests.get(self.source_url)
         text = req.text
         moment = self.extract_datetime(text)
         met_data = self.parse_hms_data(text)
         met_data['time'] = moment
         met_data['text'] = text
-        return met_data
+        return self.source_label, met_data
 
     def _sanitize_date(self, datestr):
         """Ensure date string has zero-padded numbers. Done because `strptime`
@@ -151,6 +157,7 @@ class RichlandWeather(Weather):
             data[key] = float(readings[keymap[key]])
         data['readings'] = readings
         return data
+
 
 
 

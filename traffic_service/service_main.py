@@ -9,7 +9,7 @@ def get_all_traffic():
 
     traffic = {}
     for serv in services:
-        label, data = serv().get_traffic()
+        label, data = serv()()
         traffic[label] = data
 
     return traffic

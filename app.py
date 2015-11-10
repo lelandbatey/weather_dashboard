@@ -3,10 +3,10 @@
 
 from __future__ import print_function
 from frontend import flask_component as wsgi_app
-from weather_service import RichlandWeather as weather_service
+from weather_service import get_all_weather
 from traffic_service import get_all_traffic
 
-wsgi_app.set_weather_service(weather_service)
+wsgi_app.set_weather_service(get_all_weather)
 wsgi_app.set_traffic_service(get_all_traffic)
 APP = wsgi_app.APP
 
