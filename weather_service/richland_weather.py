@@ -107,9 +107,9 @@ class RichlandWeather(Weather):
         data. The following is an annotated copy of the regular expression with
         an example:
 
-            \s\s(\w|\s|-)*\s*=\s*([-+]?\d*\.\d+|\d+)
-            └──┘└───────┘└──────┘└─────────────────┘
-             0      1        2            3
+            \s\s(\w|\s|-)*\s*=\s*([-+]?\d*\.\d+|\d+|[-+]?\d+)
+            └──┘└───────┘└──────┘└──────────────────────────┘
+             0      1        2                3
 
               blah 12num foo-bar baz = -12345.0
             └┘└────────────────────┘└─┘└──────┘
@@ -129,7 +129,7 @@ class RichlandWeather(Weather):
         as strings.
 
         """
-        float_expr = r"([-+]?\d*\.\d+|\d+)"
+        float_expr = r"([-+]?\d*\.\d+|\d+|[-+]?\d+)"
         result_expr = r"\s\s(\w|\s|-)*\s*=\s*"+float_expr
 
         results = []
@@ -163,5 +163,7 @@ class RichlandWeather(Weather):
 
 if __name__ == '__main__':
     from pprint import pprint
-    pprint(RichlandWeather().get_weather())
+    # pprint(RichlandWeather().get_weather())
+    req = requests.get(RichlandWeather().source_url).text
+    pprint(req)
 

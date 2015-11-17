@@ -32,6 +32,33 @@ SAMPLE_DATA = "".join('\r\n'
 ' Rain Gauge = 0.00\r\n'
 '\r\n')
 
+SAMPLE_DATA_TWO = "".join('\r\n'
+' Station# 11  (300A) at 390 ft above MSL     \r\n'
+'\r\n'
+' Time: 14:00:00 PST      Date: 11/17/2015\r\n'
+'\r\n'
+' Ave Wind Direction 60m = -999    Ave Temp 60m = -999.0\r\n'
+' Ave Wind Speed 60m     = -999\r\n'
+' Ave Wind Direction 25m = -999\r\n'
+' Ave Wind Speed 25m     = -999\r\n'
+' Ave Wind Direction 10m = -999    Ave Temp 10m = -999.0\r\n'
+' Ave Wind Speed 10m     = -999\r\n'
+' Max Wind Speed 10m     = -999\r\n'
+'\r\n'
+' Ave BP = -999.000 in/Hg     -25375.100 mm/Hg\r\n'
+' Max BP = -999.000 in/Hg     -25375.100 mm/Hg\r\n'
+' Min BP = -999.000 in/Hg     -25375.100 mm/Hg\r\n'
+'\r\n'
+' Ave SLP= -998.559 in/Hg    -33815.103 mbs\r\n'
+'\r\n'
+' Ave Temp 2m = -999.0        Dew-Point 2m = -999.0\r\n'
+' Max Temp 2m = -999.0        Rel-Humidity = 100.0\r\n'
+' Min Temp 2m = -999.0\r\n'
+' Delta Temp 60m-10m = -999.00\r\n'
+'\r\n')
+
+from pprint import pprint
+
 class TestWeatherBase(unittest.TestCase):
     """Test that Weather class has no implementation."""
 
@@ -48,13 +75,15 @@ class TestRichlandWeatherGetWeather(unittest.TestCase):
 
     def test_return_type(self):
         """Ensure the `get_weather` method returns dictionary"""
-        self.assertIsInstance(self.rw.get_weather(), dict)
+        service_name, ret = self.rw.get_weather()
+        self.assertIsInstance(ret, dict)
+        self.assertIsInstance(service_name, str)
 
     def test_return_keys(self):
         """Check the keys of the dict returned by `get_weather`"""
         required_keys = ['text', 'temperature', 'wind_speed', 'wind_direction',
                          'relative_humidity']
-        ret = self.rw.get_weather()
+        service_name, ret = self.rw.get_weather()
         for rk in required_keys:
             self.assertTrue(rk in ret)
 
@@ -64,7 +93,7 @@ class TestParseHMS(unittest.TestCase):
     def setUp(self):
         """Setup temp data and RW instance"""
         self.rw = RichlandWeather()
-        self.text = SAMPLE_DATA
+        self.text = SAMPLE_DATA_TWO
 
     def test_parse_type(self):
         """Test parsing of HMS data"""
