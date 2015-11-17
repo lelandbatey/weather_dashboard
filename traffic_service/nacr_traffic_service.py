@@ -56,9 +56,9 @@ class NacrTrafficService(TrafficService):
             rate, unit = rate.split(' ')
             holder['unit'] = unit
             entries.append({'timestamp': epoch, "rate": float(rate)})
-        holder['data'] = entries
+        holder['measurements'] = entries
 
-        return interface, holder
+        return interface, {'data': holder}
 
 
 
