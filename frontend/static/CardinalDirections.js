@@ -50,7 +50,7 @@ var test_degToDirection = function() {
            return true;
        };
        console.error("First does not equal second:", first, second);
-   } 
+   }
 
    assert('N', degToDirection(0).direction);
    assert('NE', degToDirection(45).direction);

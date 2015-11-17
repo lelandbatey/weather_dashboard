@@ -1,15 +1,16 @@
-define(['views/StdView', 'd3'], function(StdView, d3){
+define(['jquery', 'underscore', 'd3', 'views/StdView'],
+function($, _, d3, StdView){
 "use strict";
 
-function TrafficView(){
-   StdView.call(this);
-}
+function Traffic(){
+    StdView.call(this, 'traffic', '', '');
+};
 
-TrafficView.prototype = Object.create(StdView.prototype);
+Traffic.prototype = Object.create(StdView.prototype);
 
-TrafficView.prototype.generate_views = function (){
-    this.label = "nacr.us, eth0 ("+this.data['unit']+")";
-    var data = this.data['data'];
+Traffic.prototype.create_dom_view = function(entry){
+    var label = entry.source+" ("+entry.contents['unit']+")";
+    var data = entry.contents['measurements'];
 
     // Define D3 stuff
     var margin = {top: 3, right: 5, bottom: 35, left: 25},
@@ -32,8 +33,8 @@ TrafficView.prototype.generate_views = function (){
         .x(function(d){ return xScale(new Date(d.timestamp*1000))})
         .y(function(d){ return yScale(d.rate);});
 
-    console.log(this.entry_div);
-    console.log(this.result_div);
+    //console.log(this.entry_div);
+    //console.log(this.result_div);
     var svg = d3.select(this.result_div[0]).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -67,11 +68,9 @@ TrafficView.prototype.generate_views = function (){
         .call(xAxis.tickSize(3));
 
 
-    this.label_div.text(this.key);
+    this.label_div.text(label);
     return this.entry_div;
-}
+};
 
-
-return TrafficView;
-
+return Traffic;
 });

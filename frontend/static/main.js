@@ -17,84 +17,35 @@ requirejs.config({
 require([
     'jquery',
     'underscore',
-    'moment',
-    'moment_tz',
-    'CardinalDirections',
     'View',
-    'd3'
+    'Model'
 ],
-function($, _, moment, moment_tz, card_dir, View, d3){
+function($, _, View, Model){
 "use strict";
 
-
-
-var spec = {
-    "temperature": [
-        "Current temperature",
-        function(number){return number.toFixed(1)+" °F";}
-    ],
-    "temp_delta_hour": [
-        "Temperature change in last hour",
-        function(number){return number.toFixed(1)+" °F";}
-    ],
-    "relative_humidity": [
-        "Relative humidity",
-        function(number) {return number.toFixed(1)+"%";}
-    ],
-    "wind_speed": [
-        "Wind speed (miles/hour)",
-        function(number) {return number.toFixed(1); }
-    ],
-    "wind_direction": [
-        function(deg) {return "Wind direction ("+card_dir.degToDirection(deg).direction+" "+deg.toFixed(1)+")";},
-        function(deg) {return card_dir.degToDirection(deg).arrow;}
-    ],
-    "time": [
-        function(utc) {return "Time last updated ("+moment.tz(utc*1000, "US/Pacific").format("DD/MM/YY")+')';},
-        function(utc) {return moment.tz(utc*1000, "US/Pacific").format("HH:mm"); }
-    ]
-};
-
-$.get('api/weather', function(data){
-    var views = View.refine(data, spec);
-    View.insertViews(views);
-    //console.log(data);
-});
-
-
-function fabViews(data){
-    var t_views = [];
-
-
-    for (var key in data){
-        if (data.hasOwnProperty(key)){
-            var traff = new View.TrafficView();
-            t_views.push(traff.get_views(key, data[key]));
-        }
-    }
-    var elements = t_views;
-
+function place_views(views){
     var column_count = 0;
     var columns = $('.column');
-    for (var i = 0; i < elements.length; i++){
-        var view = elements[i];
-        //console.log("View:", view);
+    for (var i = 0; i < views.length; i++){
+        var view = views[i];
         $(columns[column_count]).append(view);
         column_count = (column_count+1) % columns.length;
     }
 }
 
-$.get('api/traffic', function(data){
-    fabViews(data);
-    //console.log(data);
+
+Model.gather(function(model){
+    //console.log(model);
+    //console.log(model.enumerateEntries());
+    var views = [];
+    _.each(model.enumerateEntries(), function(entry){
+        var view = View.render_entry(entry);
+        if (!!view){
+            views.push(view);
+        }
+    });
+    place_views(views);
 });
-
-
-var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-//console.log('Height:', h);
-//console.log('Width :', w);
-//$.get('api/h/'+h+'/w/'+w);
 
 
 });
