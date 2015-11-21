@@ -2,8 +2,9 @@ define([
     'underscore',
     'views/Traffic',
     'views/Weather',
+    'views/GpsWeather',
     'views/StdView',
-], function(_, TrafficView, WeatherView, StdView){
+], function(_, TrafficView, WeatherView, GpsWeather, StdView){
 "use strict";
 
 function construct_registry(rules){
@@ -60,6 +61,7 @@ rv.StdView = StdView;
 
 var view_rules = [
     ['weather', 'richland', '', WeatherView],
+    ['weather', 'leland_gps', '', GpsWeather],
     ['traffic', '', '', TrafficView]
 ];
 rv.view_rules = view_rules;
@@ -76,9 +78,11 @@ function is_function(f){
 
 rv.render_entry = function(entry){
     var vClass = search_registry(rv.view_registry, entry.service, entry.source, entry.name);
-    var view = new vClass();
-
-    return view.create_dom_view(entry);
+    // Handles the case of a null view class
+    if (!!vClass){
+        var view = new vClass();
+        return view.create_dom_view(entry);
+    }
 }
 
 

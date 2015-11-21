@@ -36,27 +36,38 @@ body:before {
 }
 
 .flex-container {
-	display: flex;
+	display: inline-block;
 	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
+	position: absolute;
 }
 
 
 .column {
-	/*border: 1px solid #e0e0e0;*/
-	flex-direction: column;
-	flex-wrap: nowrap;
-	display: flex;
-	justify-content: flex-start;
-	flex: 2 1 10%;
+	overflow: hidden;
+	width: 32%;
+	margin: 0 auto;
+	display: inline-block;
+}
+/*.column:first-child {*/
+	/*width: 33%;*/
+	/*float: left;*/
+	/*margin: 0;*/
+/*}*/
+.column:last-child{
+	width 33%;
+	float: right;
+	margin: 0;
 }
 .column > * {
-	margin: 0 auto;
 }
 
 body {
+	margin: 0;
+	font-size: 60px;
 	color: #2e2e2e;
+	background: white;
 	font-family: 'Droid Serif','Times New Roman';
 	text-shadow:
 		-1px -1px 0 #fff,
@@ -64,36 +75,31 @@ body {
 		-1px 1px  0 #fff,
 		1px 1px   0 #fff;
 }
-@media (min-width: 600px){
-	body {
-		font-size: 60px;
-	}
-	.label {
-		text-align: center;
-		font-size: 15px;
-		max-width: 80%;
-		margin: 0 auto;
-	}
-	.greeting {
-		font-size: 90px;
-		padding: 43px 0 23px;
-	}
+.label {
+	text-align: center;
+	font-size: 15px;
+	max-width: 80%;
+	margin: 0 auto;
 }
-@media (max-width: 600px){
-	body {
-		font-size: 30px;
-	}
-	.label {
-		text-align: center;
-		font-size: 10px;
-		max-width: 80%;
-		margin: 0 auto;
-	}
-	.greeting {
-		font-size: 45px;
-		padding: 20px 0 10px;
-	}
+.greeting {
+	font-size: 90px;
+	padding: 43px 0 23px;
 }
+/*@media (max-width: 600px){*/
+	/*body {*/
+		/*font-size: 30px;*/
+	/*}*/
+	/*.label {*/
+		/*text-align: center;*/
+		/*font-size: 10px;*/
+		/*max-width: 80%;*/
+		/*margin: 0 auto;*/
+	/*}*/
+	/*.greeting {*/
+		/*font-size: 45px;*/
+		/*padding: 20px 0 10px;*/
+	/*}*/
+/*}*/
 
 .tick > text {
 	font-size: 8px;
@@ -123,6 +129,11 @@ body {
 	fill: none;
 	stroke: steelblue;
 	stroke-width: 1.5px;
+}
+
+svg {
+	display: block;
+	margin: 0 auto;
 }
 
 

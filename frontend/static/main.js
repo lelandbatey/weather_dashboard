@@ -6,11 +6,6 @@ requirejs.config({
         underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore',
         moment: '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min',
         moment_tz: '//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.4.1/moment-timezone-with-data.min'
-    },
-    map: {
-        'views/TrafficView': {
-            'View': 'View'
-        }
     }
 });
 
