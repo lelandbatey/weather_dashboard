@@ -2,7 +2,7 @@
 """Test richland weather"""
 
 from __future__ import print_function
-from .richland_weather import Weather, RichlandWeather
+from .richland_weather import RichlandWeather
 import unittest
 
 SAMPLE_DATA = "".join('\r\n'
@@ -59,12 +59,6 @@ SAMPLE_DATA_TWO = "".join('\r\n'
 
 from pprint import pprint
 
-class TestWeatherBase(unittest.TestCase):
-    """Test that Weather class has no implementation."""
-
-    def test_mock_methods(self):
-        """Test that all Weather methods raise NotImplemented"""
-        self.assertRaises(NotImplementedError, Weather().get_weather)
 
 class TestRichlandWeatherGetWeather(unittest.TestCase):
     """Test RichlandWeather methods has correct formats"""
